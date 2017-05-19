@@ -36,7 +36,7 @@ The configuration lives in `bedrock.config.js`. Available options are:
 * `styleguide`
   * `snippetLanguage`
     * This modifies the language snippets shown in the styleguide. 
-    * `jade` or `html`
+    * `pug` or `html`
   * `colors`
     * path to the SCSS file specifying colors (for the color feature in the styleguide which shows the project's colors in a visual way)
 

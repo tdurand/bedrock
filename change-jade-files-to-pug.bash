@@ -1,0 +1,1 @@
+find . -name '*.jade' -exec sh -c 'mv "$0" "${0%.jade}.pug"' {} \;

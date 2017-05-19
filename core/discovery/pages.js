@@ -23,9 +23,9 @@ function mapChildren(children) {
 }
 
 function addPageInfo(page) {
-  page.href = '/' + page.path.replace('.jade', '.html').replace('index.html', '');
-  page.name = page.name.replace('.jade', '');
-  page.id = page.path.replace('.jade', '');
+  page.href = '/' + page.path.replace('.pug', '.html').replace('index.html', '');
+  page.name = page.name.replace('.pug', '');
+  page.id = page.path.replace('.pug', '');
 
   if (page.href === '') {
     page.href = '/';
@@ -35,7 +35,7 @@ function addPageInfo(page) {
 }
 
 function discover() {
-  return _.chain(dirTree.directoryTree(TEMPLATES_BASE_DIRECTORY, ['.jade']).children)
+  return _.chain(dirTree.directoryTree(TEMPLATES_BASE_DIRECTORY, ['.pug']).children)
     .filter(obj => obj.path.charAt(0) !== '_')
     .map(obj => {
       obj = addPageInfo(obj);
