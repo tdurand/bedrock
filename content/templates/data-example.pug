@@ -2,28 +2,54 @@ extends _layouts/master
 
 block body
 
-    // Load the array
-    
-    h1 JSON Data
+    .p-4
 
-    p JSON data is loaded by placing the JSON file in the content/data folder.
+        // Load the array
+        h1 Airtable data
 
-    pre= JSON.stringify(contentData.exampleJson, null, 2)
+        p Load data with cURL into the <code>content/data</code> folder.
 
-    h1 Loop examples
+        pre
+            code curl "https://api.airtable.com/v0/appPNWkaKNwNCBVrH/Albums?maxRecords=99&view=Grid%20view" -H "Authorization: Bearer keyrRWBwLRqy2Bt1b" -o albums.json
 
-    h2 Looping an array
-    ul
-        each person in contentData.exampleArray
-            li
-                span= person.id
-                span Hello, my name is #{person.firstName} #{person.lastName}!
+        h2 Render the data
 
-    h2 Looping an object
+        table.table.table-sm
+            thead
+                tr
+                    // th Created
+                    th Image
+                    th Name
+                    th Release date
+            each item in contentData.albums.records
+                tr
+                    // td #{item.createdTime}
+                    td
+                        if item.fields.image
+                            img(height="100" src=item.fields.image[Object.keys(item.fields.image)[0]].url)
+                    td #{item.fields.artistName} - #{item.fields.albumName}
+                    td #{item.fields.releaseDate}
 
-    each type, typeName in contentData.exampleObject
+        h1 JSON Data
+
+        p JSON data is loaded by placing the JSON file in the content/data folder.
+
+        pre= JSON.stringify(contentData.exampleJson, null, 2)
+
+        h1 Loop examples
+
+        h2 Looping an array
         ul
-            li= typeName
+            each person in contentData.exampleArray
+                li
+                    span= person.id
+                    span Hello, my name is #{person.firstName} #{person.lastName}!
+
+        h2 Looping an object
+
+        each type, typeName in contentData.exampleObject
             ul
-                each product in type
-                    li= product
+                li= typeName
+                ul
+                    each product in type
+                        li= product
